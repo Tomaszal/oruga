@@ -1,0 +1,42 @@
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+var helpers = require('./helpers.js');
+
+let config = {
+  iconPack: 'mdi',
+  useHtml5Validation: true,
+  statusIcon: true
+};
+const setOptions = options => {
+  config = options;
+};
+const getOptions = () => {
+  return config;
+};
+const setVueInstance = Vue => {
+  exports.VueInstance = Vue;
+};
+const Programmatic = {
+  getOptions,
+
+  setOptions(options) {
+    setOptions(helpers.merge(getOptions(), options, true));
+  }
+
+};
+const Plugin = {
+  install(Vue, options = {}) {
+    setVueInstance(Vue); // Options
+
+    setOptions(helpers.merge(getOptions(), options, true));
+  }
+
+};
+
+exports.Plugin = Plugin;
+exports.Programmatic = Programmatic;
+exports.getOptions = getOptions;
+exports.setOptions = setOptions;
+exports.setVueInstance = setVueInstance;
